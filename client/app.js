@@ -15,13 +15,12 @@
     socket.on('connected', () => console.log('Successfully connected!'));
 
     socket.on('capture', ({ buffer }) => {
-        console.log('Buffer came:', buffer);
         const uint8Arr = new Uint8Array(buffer);
         const rawStr = String.fromCharCode.apply(null, uint8Arr);
         const base64String = btoa(rawStr);
 
         img.onload = function () {
-            context.drawImage(this, 0, 0, canvas.width, canvas.height);
+            ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
         };
         img.src = `data:image/png;base64,${base64String}`;
     });
