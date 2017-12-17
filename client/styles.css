@@ -1,0 +1,15 @@
+body {
+    text-align: center;
+}
+
+body > h1 {
+    color: gray;
+}
+
+.canvas-container {
+    text-align: center;
+}
+
+.canvas-container > canvas {
+    border: 1px solid lightgray;
+}

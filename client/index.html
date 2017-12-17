@@ -3,9 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Raspberry Client</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <meta name="viewport" content="initial-scale=1"/>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-<h1>Main page</h1>
+<h1>Video from remote device</h1>
+<div class="canvas-container">
+    <canvas id="video"
+            width="640"
+            height="480">
+    </canvas>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
