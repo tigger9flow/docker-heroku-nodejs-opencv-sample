@@ -7,21 +7,23 @@
     ctx.fillStyle = 'lightgray';
     ctx.font = '26px Arial';
     ctx.fillText(
-        'Loading...',
+        'No Signal...',
         canvas.width / 2 - 60,
         canvas.height / 2
     );
 
-    socket.on('connected', () => console.log('Successfully connected!'));
+    socket.on('connected', console.log);
 
-    socket.on('capture', ({ buffer }) => {
-        const uint8Arr = new Uint8Array(buffer);
-        const rawStr = String.fromCharCode.apply(null, uint8Arr);
-        const base64String = btoa(rawStr);
+    socket.on('captureError', console.error);
+
+    socket.on('capture', ({ base64Str }) => {
+        // const uint8Arr = new Uint8Array(buffer);
+        // const rawStr = new TextDecoder('utf-8').decode(uint8Arr);
+        // const base64String = btoa(decodeURI(rawStr));
 
         img.onload = function () {
             ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
         };
-        img.src = `data:image/png;base64,${base64String}`;
+        img.src = `data:image/jpeg;base64,${base64Str}`;
     });
 }());
