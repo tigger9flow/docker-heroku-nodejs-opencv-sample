@@ -17,7 +17,7 @@
     socket.on('capture', ({ buffer }) => {
         console.log('Buffer came:', buffer);
         const uint8Arr = new Uint8Array(buffer);
-        const rawStr = String.fromCharCode(...uint8Arr);
+        const rawStr = String.fromCharCode.apply(null, uint8Arr);
         const base64String = btoa(rawStr);
 
         img.onload = function () {
