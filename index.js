@@ -1,12 +1,20 @@
-const express = require('express');
+const app        = require('express')();
+const server     = require('http').Server(app);
+const bodyParser = require('body-parser');
+const socketIO   = require('socket.io');
+const router     = require('./routes');
+const sockets    = require('./sockets');
 
-const app = express();
 const PORT = process.env.PORT || 8080;
 
-app.get('*', (req, res) => res.send('It works!'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(router);
 
-app.listen(PORT, err => {
-  if (err) console.error(err);
+sockets(socketIO(server, { origins: '*:*' }));
 
-  console.log(`Server is app and running on ${PORT} port.`)
+server.listen(PORT, err => {
+    if (err) console.error(err);
+
+    console.log(`Server is app and running on ${PORT} port.`)
 });
