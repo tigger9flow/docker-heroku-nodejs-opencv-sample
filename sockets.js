@@ -1,17 +1,32 @@
+const cv = require('opencv');
+const CYAN_COLOR = [255, 255, 0];
+const RECT_THICKNESS = 2;
+
 const sockets = io => {
     io.on('connection', socket => {
         socket.emit('connected', 'Connected successfully!');
 
+        socket.on('error', console.error);
+
         socket.on('frame', data => {
-            try {
-                io.emit('capture', {
-                    base64Str: new Buffer(data.buffer).toString('base64')
+            cv.readImage(data.buffer, (_, img) => {
+                img.detectObject(cv.FACE_CASCADE, {}, (_, faces) => {
+                    faces.forEach(face =>
+                        img.rectangle(
+                            [face.x, face.y],
+                            [face.width, face.height],
+                            CYAN_COLOR,
+                            RECT_THICKNESS
+                        )
+                    );
+
+                    socket.broadcast.emit('capture', {
+                        base64Str: img
+                            .toBuffer()
+                            .toString('base64')
+                    });
                 });
-            } catch (e) {
-                return io.emit('captureError', {
-                    error: e.toString()
-                });
-            }
+            });
         });
     });
 };
