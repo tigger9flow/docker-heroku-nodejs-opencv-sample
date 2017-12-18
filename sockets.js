@@ -11,7 +11,7 @@ const sockets = io => {
         socket.on('frame', data => {
             cv.readImage(data.buffer, (_, img) => {
                 img.detectObject(cv.FACE_CASCADE, {}, (_, faces) => {
-                    socket.broadcast.emit(
+                    io.emit(
                         faces.length ? 'faceDetected' : 'faceNotDetected'
                     );
 
