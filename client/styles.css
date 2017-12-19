@@ -18,9 +18,40 @@ body > h1 {
     border: 2px solid #696969;
 }
 
-.canvas-container > .lump {
-    width: 40px;
-    height: 40px;
-    margin: 20px auto;
-    background-color: red;
+.lump {
+    width: 30px;
+    height: 30px;
+    background-color: #de0000;
+    border-radius: 17px;
+    border: 3px solid #383838;
+}
+
+.arrow-box {
+    width: 30%;
+    margin-top: 20px;
+    min-width: 250px;
+    display: flex;
+    align-self: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.arrow {
+    display: flex;
+    padding: 15px 18px;
+    border-radius: 30px;
+    background-color: #fafafa;
+    box-shadow: 2px 1px 20px 3px #2d2d2d;
+    color: #404040;
+}
+
+.arrow:hover {
+    cursor: pointer;
+}
+
+.arrow-box > .disabled {
+    background-color: #7b7b7b;
+    color: #545454;
+    box-shadow: none;
+    cursor: default;
 }

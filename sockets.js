@@ -6,7 +6,7 @@ const sockets = io => {
     io.on('connection', socket => {
         socket.emit('connected', 'Connected successfully!');
 
-        socket.on('error', console.error);
+        socket.on('moved', value => socket.broadcast.emit('moved', value));
 
         socket.on('frame', data => {
             cv.readImage(data.buffer, (_, img) => {
