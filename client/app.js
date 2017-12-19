@@ -43,7 +43,7 @@
                 socket.emit('moved', POSITIONS[currentIndex]);
             }
 
-            if (currentIndex >= POSITIONS.length) {
+            if (currentIndex >= POSITIONS.length - 1) {
                 disableArrow(rightArrow);
             }
         };
