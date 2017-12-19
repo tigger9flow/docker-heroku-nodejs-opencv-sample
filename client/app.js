@@ -9,6 +9,7 @@
 
     const leftArrow = document.querySelector('.left');
     const rightArrow = document.querySelector('.right');
+    const lump = document.querySelector('.lump');
 
     ctx.fillStyle = '#7b7b7b';
     ctx.font = '26px Arial';
@@ -40,7 +41,9 @@
                 currentIndex++;
                 enableArrow(leftArrow);
                 socket.emit('moved', POSITIONS[currentIndex]);
-            } else {
+            }
+
+            if ((currentIndex + 1) >= POSITIONS.length) {
                 disableArrow(rightArrow);
             }
         };
@@ -50,7 +53,9 @@
                 currentIndex--;
                 enableArrow(rightArrow);
                 socket.emit('moved', POSITIONS[currentIndex]);
-            } else {
+            }
+
+            if ((currentIndex - 1) <= 0) {
                 disableArrow(leftArrow);
             }
         };
@@ -64,6 +69,10 @@
 
         img.src = `data:image/jpeg;base64,${base64Str}`;
     });
+
+    socket.on('faceDetected', () => lump.style.backgroundColor = '#59F1E6');
+
+    socket.on('faceNotDetected', () => lump.style.backgroundColor = '#6b6b6b');
 
     socket.on('moved', value => {
         console.log('MOVED', value);
