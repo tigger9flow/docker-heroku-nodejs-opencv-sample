@@ -8,8 +8,7 @@ body > h1 {
 }
 
 .canvas-container {
-    display: flex;
-    flex-direction: column;
+    text-align: center;
     max-width: 640px;
     margin: 0 auto;
 }
@@ -28,7 +27,7 @@ body > h1 {
 
 .arrow-box {
     width: 30%;
-    margin-top: 20px;
+    margin: 20px auto;
     min-width: 250px;
     display: flex;
     align-self: center;
