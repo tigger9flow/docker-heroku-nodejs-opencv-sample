@@ -43,7 +43,7 @@
                 socket.emit('moved', POSITIONS[currentIndex]);
             }
 
-            if ((currentIndex + 1) >= POSITIONS.length) {
+            if (currentIndex >= POSITIONS.length) {
                 disableArrow(rightArrow);
             }
         };
@@ -55,7 +55,7 @@
                 socket.emit('moved', POSITIONS[currentIndex]);
             }
 
-            if ((currentIndex - 1) <= 0) {
+            if (currentIndex <= 0) {
                 disableArrow(leftArrow);
             }
         };
@@ -75,7 +75,6 @@
     socket.on('faceNotDetected', () => lump.style.backgroundColor = '#6b6b6b');
 
     socket.on('moved', value => {
-        console.log('MOVED', value);
        currentIndex = POSITIONS.findIndex(x => x === value);
     });
 }());
